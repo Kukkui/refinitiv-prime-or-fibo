@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .column {
+            float: left;
+            padding: 10px;
+            height: 1000px;
+        }
+        .left {
+            width: 200px;
+        }
+        .right {
+            width: 300px;
+        }
+        .middle {
+            width: calc(100% - 500px);
+        }
+        .row:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+<div class='row'>
+    <div class='column left' style='background-color:#aaa;'>
+        <input type='number' id='number' name='someid' pattern='[0-9]' value='0' style='width:30%'/>
+    </div>
+    <div class='column middle' style='background-color:#bbb;'>
+        <select name='primeOrFibo' id='primeOrFibo'>
+            <option value='isPrime' onclick='checkPrimeOrFibo()'>isPrime</option>
+            <option value='isFibo' onclick='checkPrimeOrFibo()'>isFibo</option>
+        </select>
+    </div>
+    <div class='column right' style='background-color:#ccc;'>
+        <h2 id='result' value='-' text='-'></h2>
+    </div>
+</div>
+<script>
+    const result = document.getElementById('result');
+    const number = document.getElementById('number');
+    const primeOrFibo = document.getElementById('primeOrFibo');
+
+    function checkPrimeOrFibo(){
+        if(primeOrFibo.value == 'isPrime'){
+            result.innerHTML = isPrime(number.value)
+        }
+        else if(primeOrFibo.value == 'isFibo'){
+            result.innerHTML = isFiboNacci(number.value)
+        }
+        else{
+            alert('NON-SELECTED')
+        }
+    }
+
+    function isFiboNacci(num) {
+        if (isSquare(5*(num*num)-4) || isSquare(5*(num*num)+4)) {
+            return true;
+        } else { return false; }
+    }
+
+    function isSquare(n) {
+        return n > 0 && Math.sqrt(n) % 1 === 0;
+    };
+
+    function isPrime(num) {
+        for(var i = 2; i < num; i++)
+            if(num % i === 0) return false;
+        return num > 1;
+    }
+</script>
+</body>
+</html>
